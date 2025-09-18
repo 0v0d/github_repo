@@ -7,27 +7,15 @@ class GithubRepoPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final repoNames = ref.watch(githubRepoViewModelProvider); // 状態を監視
-    final viewModel = ref.read(githubRepoViewModelProvider.notifier);
+    final viewModel = ref.watch(githubRepoViewModelProvider.notifier);
+    final uiState = ref.watch(githubRepoViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('GitHub Repositories'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: repoNames.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(repoNames[index].fullName), // fullNameを表示
-                  leading: const Icon(Icons.folder),
-                );
-              },
-            ),
-          ),
-        ],
+      body: GithubRepoListView(
+        state: uiState,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -36,5 +24,32 @@ class GithubRepoPage extends HookConsumerWidget {
         child: const Icon(Icons.search),
       ),
     );
+  }
+}
+
+class GithubRepoListView extends StatelessWidget {
+  final Object state;
+
+  const GithubRepoListView({
+    super.key,
+    required this.state,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (state) {
+      UiStateLoading() => const Center(child: CircularProgressIndicator()),
+      UiStateSuccess(:final data) => ListView.builder(
+          itemCount: data.items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(data.items[index].fullName),
+            );
+          },
+        ),
+      UiStateNetworkError() => const Center(child: Text('Network Error')),
+      UiStateEmptyResult() => const Center(child: Text('No Results Found')),
+      _ => const SizedBox(),
+    };
   }
 }
