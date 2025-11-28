@@ -1,24 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:random_images/model/domain/github_repo.dart';
 import 'package:random_images/repository/github_repo_repository.dart';
 
 import '../model/domain/github_repo_list.dart';
 
 final githubRepoViewModelProvider =
-    StateNotifierProvider<GithubRepoViewModel, UiState>(
-        (ref) => GithubRepoViewModel(ref));
+NotifierProvider<GithubRepoViewModel, UiState>(GithubRepoViewModel.new);
 
-class GithubRepoViewModel extends StateNotifier<UiState> {
-  GithubRepoViewModel(this._ref) : super(UiState.loading());
-
-  final Ref _ref;
-
-  late final GithubRepoRepository githubRepoRepository =
-      _ref.read(githubRepoRepositoryProvider);
+class GithubRepoViewModel extends Notifier<UiState> {
+  @override
+  UiState build() {
+    // 初期状態を返す
+    return UiState.loading();
+  }
+  GithubRepoRepository get _repository => ref.read(githubRepoRepositoryProvider);
 
   Future<void> fetchRepoNames(String query) async {
+    state = UiState.loading();
     try {
-      final repos = await githubRepoRepository.getRepos(query);
+      final repos = await _repository.getRepos(query);
 
       if (repos.items.isEmpty) {
         state = UiState.emptyResult();

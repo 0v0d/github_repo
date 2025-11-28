@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final dioProvider = Provider((Ref ref) => AppDio.getInstance(ref));
+final dioProvider = Provider<Dio>((Ref ref) => AppDio.getInstance(ref));
 
 class AppDio {
   static Dio getInstance(Ref ref) => Dio(_createBaseOptions());

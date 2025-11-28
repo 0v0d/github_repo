@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/domain/github_repo.dart';
 import '../../model/domain/github_repo_list.dart';
 
-final githubRepoLocalDataSourceProvider =
-    Provider((ref) => GithubRepoLocalDataSourceImpl());
+final githubRepoLocalDataSourceProvider = Provider<GithubRepoLocalDataSource>(
+  (ref) => GithubRepoLocalDataSourceImpl(),
+);
 
 abstract class GithubRepoLocalDataSource {
   Future<GithubRepoList?> getRepos(String query);

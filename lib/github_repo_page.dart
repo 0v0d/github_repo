@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:random_images/github_repo_detail_page.dart';
 import 'package:random_images/viewmodel/github_repo_view_model.dart';
 
-class GithubRepoPage extends HookConsumerWidget {
+class GithubRepoPage extends ConsumerWidget {
   const GithubRepoPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(githubRepoViewModelProvider.notifier);
+    final viewModel = ref.read(githubRepoViewModelProvider.notifier);
     final uiState = ref.watch(githubRepoViewModelProvider);
 
     return Scaffold(

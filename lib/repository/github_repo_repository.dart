@@ -9,19 +9,22 @@ abstract class GithubRepoRepository {
   Future<GithubRepoList> getRepos(String query);
 }
 
-final githubRepoRepositoryProvider =
-    Provider((ref) => GithubRepoRepositoryImpl(ref));
+final githubRepoRepositoryProvider = Provider<GithubRepoRepository>(
+  (ref) => GithubRepoRepositoryImpl(ref),
+);
 
 class GithubRepoRepositoryImpl implements GithubRepoRepository {
   GithubRepoRepositoryImpl(this._ref);
 
   final Ref _ref;
 
-  late final GithubRepoRemoteDataSource remoteDataSource =
-      _ref.read(githubRepoRemoteDataSourceProvider);
+  late final GithubRepoRemoteDataSource remoteDataSource = _ref.read(
+    githubRepoRemoteDataSourceProvider,
+  );
 
-  late final GithubRepoLocalDataSource localDataSource =
-      _ref.read(githubRepoLocalDataSourceProvider);
+  late final GithubRepoLocalDataSource localDataSource = _ref.read(
+    githubRepoLocalDataSourceProvider,
+  );
 
   @override
   Future<GithubRepoList> getRepos(String query) async {
