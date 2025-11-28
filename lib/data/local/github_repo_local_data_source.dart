@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../model/domain/github_repo.dart';
+import '../../model/domain/github_repo_list.dart';
 
 final githubRepoLocalDataSourceProvider =
     Provider((ref) => GithubRepoLocalDataSourceImpl());

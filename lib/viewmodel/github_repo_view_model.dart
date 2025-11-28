@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:random_images/model/domain/github_repo.dart';
 import 'package:random_images/repository/github_repo_repository.dart';
 
+import '../model/domain/github_repo_list.dart';
+
 final githubRepoViewModelProvider =
     StateNotifierProvider<GithubRepoViewModel, UiState>(
         (ref) => GithubRepoViewModel(ref));

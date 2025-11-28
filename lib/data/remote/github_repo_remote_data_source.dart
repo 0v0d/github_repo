@@ -5,7 +5,7 @@ import 'package:retrofit/retrofit.dart';
 import '../../model/api/github_search_response.dart';
 import 'api_client.dart';
 
-part 'github_repo_remote_date_source.g.dart';
+part 'github_repo_remote_data_source.g.dart';
 
 final githubRepoRemoteDataSourceProvider =
 Provider((ref) => GithubRepoRemoteDataSource(ref));

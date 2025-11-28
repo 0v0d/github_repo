@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../domain/github_repo.dart';
+import '../domain/github_repo_list.dart';
 import 'github_repo_response.dart';
 
 part 'github_search_response.freezed.dart';

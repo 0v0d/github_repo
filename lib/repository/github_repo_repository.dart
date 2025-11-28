@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/local/github_repo_local_data_source.dart';
 import '../data/remote/github_repo_remote_data_source.dart';
 import '../model/domain/github_repo.dart';
+import '../model/domain/github_repo_list.dart';
 
 abstract class GithubRepoRepository {
   Future<GithubRepoList> getRepos(String query);
